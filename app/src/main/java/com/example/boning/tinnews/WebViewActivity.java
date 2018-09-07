@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.boning.tinnews.common.TinBasicActivity;
+import com.example.boning.tinnews.common.TinBasicFragment;
 
 public class WebViewActivity extends TinBasicActivity implements PopupMenu.OnMenuItemClickListener {
     public static final String URL = "url";
@@ -55,21 +56,21 @@ public class WebViewActivity extends TinBasicActivity implements PopupMenu.OnMen
                 progressBar.setVisibility(View.GONE);
             }
         });
-//        Bundle bundle = getIntent().getExtras();
-//        if (bundle != null) {
-//            Bundle innerBundle = bundle.getBundle(BUNDLE);
-//            if (innerBundle != null) {
-//                url = innerBundle.getString(URL);
-//                webView.loadUrl(url);
-//            }
-//        }
-        url = "http://www.foxnews.com/";
-        webView.loadUrl(url);
+
+//        url = "http://www.foxnews.com/";
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            Bundle innerBundle = bundle.getBundle(BUNDLE);
+            if (innerBundle != null) {
+                url = innerBundle.getString(URL);
+                webView.loadUrl(url);
+            }
+        }
 
         findViewById(R.id.more).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            showMenu(v);
+                showMenu(v);
             }
         });
     }
@@ -111,6 +112,10 @@ public class WebViewActivity extends TinBasicActivity implements PopupMenu.OnMen
         }
         return true;
     }
+
+    // implement the doFragmentTransaction
+    @Override
+    public void doFragmentTransaction(TinBasicFragment basicFragment) {}
 
 
     @Override
